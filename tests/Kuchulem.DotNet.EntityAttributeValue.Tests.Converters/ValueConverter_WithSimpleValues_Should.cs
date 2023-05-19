@@ -1,24 +1,34 @@
 using Kuchulem.DotNet.EntityAttributeValue.Abstractions;
 using Kuchulem.DotNet.EntityAttributeValue.Converters;
+using Kuchulem.DotNet.EntityAttributeValue.Converters.EAVValueConverters;
 using Kuchulem.DotNet.EntityAttributeValue.Tests.Converters.Models;
 
 namespace Kuchulem.DotNet.EntityAttributeValue.Tests.Converters
 {
-    public class ValueConverter_Should
+    public class ValueConverter_WithSimpleValues_Should
     {
-        private IEAVEntityRepository<MockEntity, string> entityRepositoryProvider = new MockEntityRepository();
+        private MockEntityRepository entityRepository;
+        private MockAttributeRepository attributesRepository;
+        private EAVValueConverterProvider valueConverterProvider;
 
         [SetUp]
         public void Setup()
         {
+            entityRepository = new MockEntityRepository();
+            attributesRepository = new MockAttributeRepository();
+
+            valueConverterProvider = new EAVValueConverterProvider();
+            valueConverterProvider.RegisterGenericConverters();
+            valueConverterProvider.Register(attributesRepository.GetByKey("entity-value"), new EAVValueToMockEntityConverter(entityRepository));
+            valueConverterProvider.Register(attributesRepository.GetByKey("entity-list-single"), new EAVValueToMockEntityConverter(entityRepository));
         }
 
         [Test]
         public void ConvertToString()
         {
-            var entity = entityRepositoryProvider.GetByKey("valid");
+            var entity = entityRepository.GetByKey("valid-entity");
 
-            var valueConverter = new ValueConverter(entityRepositoryProvider);
+            var valueConverter = new ValueConverter(valueConverterProvider);
 
             var value = valueConverter.Convert<string>(entity.Values.Where(v => v.Attribute?.AttributeName == "string-value").First());
 
@@ -28,9 +38,9 @@ namespace Kuchulem.DotNet.EntityAttributeValue.Tests.Converters
         [Test]
         public void ConvertToInt()
         {
-            var entity = entityRepositoryProvider.GetByKey("valid");
+            var entity = entityRepository.GetByKey("valid-entity");
 
-            var valueConverter = new ValueConverter(entityRepositoryProvider);
+            var valueConverter = new ValueConverter(valueConverterProvider);
 
             var value = valueConverter.Convert<int>(entity.Values.Where(v => v.Attribute?.AttributeName == "int-value").First());
 
@@ -40,9 +50,9 @@ namespace Kuchulem.DotNet.EntityAttributeValue.Tests.Converters
         [Test]
         public void ConvertToDouble()
         {
-            var entity = entityRepositoryProvider.GetByKey("valid");
+            var entity = entityRepository.GetByKey("valid-entity");
 
-            var valueConverter = new ValueConverter(entityRepositoryProvider);
+            var valueConverter = new ValueConverter(valueConverterProvider);
 
             var value = valueConverter.Convert<double>(entity.Values.Where(v => v.Attribute?.AttributeName == "double-value").First());
 
@@ -52,9 +62,9 @@ namespace Kuchulem.DotNet.EntityAttributeValue.Tests.Converters
         [Test]
         public void ConvertToBoolean_True()
         {
-            var entity = entityRepositoryProvider.GetByKey("valid");
+            var entity = entityRepository.GetByKey("valid-entity");
 
-            var valueConverter = new ValueConverter(entityRepositoryProvider);
+            var valueConverter = new ValueConverter(valueConverterProvider);
 
             var value = valueConverter.Convert<bool>(entity.Values.Where(v => v.Attribute?.AttributeName == "bool-value-true").First());
 
@@ -64,9 +74,9 @@ namespace Kuchulem.DotNet.EntityAttributeValue.Tests.Converters
         [Test]
         public void ConvertToBoolean_False()
         {
-            var entity = entityRepositoryProvider.GetByKey("valid");
+            var entity = entityRepository.GetByKey("valid-entity");
 
-            var valueConverter = new ValueConverter(entityRepositoryProvider);
+            var valueConverter = new ValueConverter(valueConverterProvider);
 
             var value = valueConverter.Convert<bool>(entity.Values.Where(v => v.Attribute?.AttributeName == "bool-value-false").First());
 
@@ -76,9 +86,9 @@ namespace Kuchulem.DotNet.EntityAttributeValue.Tests.Converters
         [Test]
         public void ConvertToDateTime()
         {
-            var entity = entityRepositoryProvider.GetByKey("valid");
+            var entity = entityRepository.GetByKey("valid-entity");
 
-            var valueConverter = new ValueConverter(entityRepositoryProvider);
+            var valueConverter = new ValueConverter(valueConverterProvider);
 
             var value = valueConverter.Convert<DateTime>(entity.Values.Where(v => v.Attribute?.AttributeName == "datetime-value").First());
 
@@ -88,13 +98,13 @@ namespace Kuchulem.DotNet.EntityAttributeValue.Tests.Converters
         [Test]
         public void ConvertToEntity()
         {
-            var entity = entityRepositoryProvider.GetByKey("valid");
+            var entity = entityRepository.GetByKey("valid-entity");
 
-            var valueConverter = new ValueConverter(entityRepositoryProvider);
+            var valueConverter = new ValueConverter(valueConverterProvider);
 
             var value = valueConverter.Convert<MockEntity>(entity.Values.Where(v => v.Attribute?.AttributeName == "entity-value").First());
 
-            Assert.That(value is MockEntity child && child.Identifier == "child", Is.True);
+            Assert.That(value is MockEntity child && child.Id == "child", Is.True);
         }
     }
 }

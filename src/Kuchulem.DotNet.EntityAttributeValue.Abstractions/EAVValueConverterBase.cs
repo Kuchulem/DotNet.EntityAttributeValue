@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Kuchulem.DotNet.EntityAttributeValue.Abstractions
 {
-    public interface ITypeToValueConverterProvider
+    public abstract class EAVValueConverterBase<T>
     {
-        ITypeToValueConverter<T> GetConverter<T>(EAVValueKind valueKind);
+        public abstract T Convert(string value);
+
+        public abstract string ConvertBack(T value);
     }
 }

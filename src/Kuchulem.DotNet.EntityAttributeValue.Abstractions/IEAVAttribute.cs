@@ -8,7 +8,7 @@ namespace Kuchulem.DotNet.EntityAttributeValue.Abstractions
 {
     public interface IEAVAttribute
     {
-        string AttributeName { get; set; }
+        string? AttributeName { get; set; }
 
         EAVValueKind ValueKind { get; set; }
 

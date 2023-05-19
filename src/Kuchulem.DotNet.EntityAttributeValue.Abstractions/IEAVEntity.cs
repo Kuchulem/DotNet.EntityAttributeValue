@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Kuchulem.DotNet.EntityAttributeValue.Abstractions
 {
-    public interface IEAVEntity<TIdentifier>
+    public interface IEAVEntity
     {
         public IEnumerable<IEAVValue> Values { get; set; }
-
-        public TIdentifier Identifier { get; }
     }
 }

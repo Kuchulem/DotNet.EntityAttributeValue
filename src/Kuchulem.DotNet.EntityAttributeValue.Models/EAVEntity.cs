@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Kuchulem.DotNet.EntityAttributeValue.Models
 {
-    public abstract class EAVEntity<TEntityKey> : IEAVEntity<TEntityKey>
+    public abstract class EAVEntity : IEAVEntity
     {
         public IEnumerable<IEAVValue> Values { get; set; } = Enumerable.Empty<IEAVValue>();
-        public abstract TEntityKey Identifier { get; }
     }
 }

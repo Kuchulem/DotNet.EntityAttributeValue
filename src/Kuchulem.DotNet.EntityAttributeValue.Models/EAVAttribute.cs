@@ -9,7 +9,7 @@ namespace Kuchulem.DotNet.EntityAttributeValue.Models
 {
     public class EAVAttribute : IEAVAttribute
     {
-        public required string AttributeName { get; set; }
+        public virtual string? AttributeName { get; set; }
 
         public EAVValueKind ValueKind { get; set; }
 

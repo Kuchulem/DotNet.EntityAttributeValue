@@ -1,4 +1,5 @@
 ﻿using Kuchulem.DotNet.EntityAttributeValue.Abstractions;
+using Kuchulem.DotNet.EntityAttributeValue.Converters.EAVValueConverters;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,59 +11,58 @@ namespace Kuchulem.DotNet.EntityAttributeValue.Converters
 {
     public class ValueConverter
     {
-        private readonly IEntityRepositoryProvider entityRepositoryProvider;
+        private readonly EAVValueConverterProvider converterProvider;
 
-        public ValueConverter(IEntityRepositoryProvider entityRepositoryProvider)
+        public ValueConverter(EAVValueConverterProvider converterProvider)
         {
-            this.entityRepositoryProvider = entityRepositoryProvider;
+            this.converterProvider = converterProvider;
         }
 
         public T? Convert<T>(IEAVValue value)
         {
-            if (!MatchesType<T>(value))
-                throw new Exception("Invalid type");
+            if(value.Attribute is not IEAVAttribute attribute)
+                throw new Exception("No attribute provided with the value");
 
-            return (T?)DoConvert(value);
+            var toConvert = value.RawValue ?? "";
+
+            if (TryGetConverter<T>(attribute, out var converter) && converter is not null)
+                return converter.Convert(toConvert);
+
+            throw new Exception("Could not get converter");
         }
 
-        private bool MatchesType<T>(IEAVValue value)
+        public IEnumerable<T> ConvertList<T>(IEAVValue value)
         {
-            if(!MatchesListType<T>(value))
-                return false;
+            if (value.Attribute is not IEAVAttribute attribute)
+                throw new Exception("No attribute provided with the value");
 
-            var type = typeof(T);
+            var toConvert = value.RawValue ?? "";
 
-            return value.Attribute?.ValueKind switch
-            {
-                EAVValueKind.Boolean => type == typeof(bool),
-                EAVValueKind.DateTime => type == typeof(DateTime),
-                EAVValueKind.Entity => type.IsAssignableFrom(typeof(IEAVEntity)),
-                EAVValueKind.Integer => 
-                    type == typeof(int),
-                EAVValueKind.Double =>
-                    type == typeof(double),
-                _ => type == typeof(string)
-            };
+            if (attribute.ValueListKind != EAVValueListKind.Multiple)
+                throw new Exception("Not a list value");
+
+            var rawValues = new EAVValueListToRawValueConverter().ConvertBack(toConvert);
+
+            if (TryGetConverter<T>(attribute, out var converter) && converter is not null)
+                return DoConvertList(converter, rawValues);
+
+            throw new Exception("Could not get converter");
         }
 
-        private bool MatchesListType<T>(IEAVValue value)
+        private bool TryGetConverter<T>(IEAVAttribute attribute, out EAVValueConverterBase<T>? converter)
         {
-            return (typeof(T).IsAssignableFrom(typeof(IEnumerable<object>))
-                && EAVValueListKind.Multiple == value.Attribute?.ValueListKind)
-                || EAVValueListKind.Multiple != value.Attribute?.ValueListKind;
+            if ((converterProvider.TryGetConverter<T>(attribute, out converter)
+                || converterProvider.TryGetConverter<T>(attribute.ValueKind, out converter))
+                && converter is not null)
+                return true;
+
+            return false;
         }
 
-        private object? DoConvert(IEAVValue value)
+        private IEnumerable<T> DoConvertList<T>(EAVValueConverterBase<T> converter, IEnumerable<string> rawValues)
         {
-            return value.Attribute?.ValueKind switch
-            {
-                EAVValueKind.Boolean => value.RawValue == true.ToString(CultureInfo.InvariantCulture),
-                EAVValueKind.DateTime => DateTime.Parse(value.RawValue ?? "", CultureInfo.InvariantCulture),
-                //EAVValueKind.Entity => entityRepository.GetByKey(value.RawValue),
-                EAVValueKind.Double => double.Parse(value.RawValue ?? "", CultureInfo.InvariantCulture),
-                EAVValueKind.Integer => int.Parse(value.RawValue ?? "", CultureInfo.InvariantCulture),
-                _ => value.RawValue
-            };
+            foreach(var rawValue in rawValues)
+                yield return converter.Convert(rawValue);
         }
     }
 }

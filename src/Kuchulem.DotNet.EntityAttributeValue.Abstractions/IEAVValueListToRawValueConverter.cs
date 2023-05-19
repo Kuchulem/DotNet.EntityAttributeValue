@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Kuchulem.DotNet.EntityAttributeValue.Abstractions
 {
-    public interface IEAVEntityDefinition
+    public interface IEAVValueListToRawValueConverter
     {
-        public string DefinitionName { get; set; }
-        public IEnumerable<IEAVAttribute> Attributes { get; set; }
+        string Convert(IEnumerable<string> values);
+
+        IEnumerable<string> ConvertBack(string input);
     }
 }

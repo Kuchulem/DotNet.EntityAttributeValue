@@ -14,6 +14,6 @@ namespace Kuchulem.DotNet.EntityAttributeValue.Abstractions
         String = 3,
         Entity = 5,
         DateTime = 6,
-        Double = 7,
+        Number = 7,
     }
 }
