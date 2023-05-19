@@ -18,9 +18,9 @@ namespace Kuchulem.DotNet.EntityAttributeValue.Converters
             this.converterProvider = converterProvider;
         }
 
-        public T? Convert<T>(IEAVValue value)
+        public T? Convert<T>(EAVValueBase value)
         {
-            if(value.Attribute is not IEAVAttribute attribute)
+            if(value.Attribute is not EAVAttributeBase attribute)
                 throw new Exception("No attribute provided with the value");
 
             var toConvert = value.RawValue ?? "";
@@ -31,9 +31,9 @@ namespace Kuchulem.DotNet.EntityAttributeValue.Converters
             throw new Exception("Could not get converter");
         }
 
-        public IEnumerable<T> ConvertList<T>(IEAVValue value)
+        public IEnumerable<T> ConvertList<T>(EAVValueBase value)
         {
-            if (value.Attribute is not IEAVAttribute attribute)
+            if (value.Attribute is not EAVAttributeBase attribute)
                 throw new Exception("No attribute provided with the value");
 
             var toConvert = value.RawValue ?? "";
@@ -49,7 +49,7 @@ namespace Kuchulem.DotNet.EntityAttributeValue.Converters
             throw new Exception("Could not get converter");
         }
 
-        private bool TryGetConverter<T>(IEAVAttribute attribute, out EAVValueConverterBase<T>? converter)
+        private bool TryGetConverter<T>(EAVAttributeBase attribute, out EAVValueConverterBase<T>? converter)
         {
             if ((converterProvider.TryGetConverter<T>(attribute, out converter)
                 || converterProvider.TryGetConverter<T>(attribute.ValueKind, out converter))

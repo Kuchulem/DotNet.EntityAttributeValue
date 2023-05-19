@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kuchulem.DotNet.EntityAttributeValue.Abstractions", "src\Kuchulem.DotNet.EntityAttributeValue.Abstractions\Kuchulem.DotNet.EntityAttributeValue.Abstractions.csproj", "{F106CCE4-FDE2-434C-ACBB-EB3E4ECF8395}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kuchulem.DotNet.EntityAttributeValue.Models", "src\Kuchulem.DotNet.EntityAttributeValue.Models\Kuchulem.DotNet.EntityAttributeValue.Models.csproj", "{F156ED8E-67D2-45DD-B3C1-2334F6ADE3EC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kuchulem.DotNet.EntityAttributeValue.Tests.Converters", "tests\Kuchulem.DotNet.EntityAttributeValue.Tests.Converters\Kuchulem.DotNet.EntityAttributeValue.Tests.Converters.csproj", "{2E65D9EA-1934-49B5-919F-C7AB526DAB15}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kuchulem.DotNet.EntityAttributeValue.Converters", "src\Kuchulem.DotNet.EntityAttributeValue.Converters\Kuchulem.DotNet.EntityAttributeValue.Converters.csproj", "{9F3F7553-9495-4AD2-8AED-29E12EB7F691}"
@@ -21,10 +19,6 @@ Global
 		{F106CCE4-FDE2-434C-ACBB-EB3E4ECF8395}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F106CCE4-FDE2-434C-ACBB-EB3E4ECF8395}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F106CCE4-FDE2-434C-ACBB-EB3E4ECF8395}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F156ED8E-67D2-45DD-B3C1-2334F6ADE3EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F156ED8E-67D2-45DD-B3C1-2334F6ADE3EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F156ED8E-67D2-45DD-B3C1-2334F6ADE3EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F156ED8E-67D2-45DD-B3C1-2334F6ADE3EC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E65D9EA-1934-49B5-919F-C7AB526DAB15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2E65D9EA-1934-49B5-919F-C7AB526DAB15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E65D9EA-1934-49B5-919F-C7AB526DAB15}.Release|Any CPU.ActiveCfg = Release|Any CPU

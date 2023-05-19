@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Kuchulem.DotNet.EntityAttributeValue.Abstractions
 {
-    public interface IEAVValue
+    public abstract class EAVEntityBase
     {
-        IEAVEntity? Entity { get; set; }
-        IEAVAttribute? Attribute { get; set; }
-        string? RawValue { get; set; }
+        public IEnumerable<EAVValueBase> Values { get; set; } = Enumerable.Empty<EAVValueBase>();
     }
 }
