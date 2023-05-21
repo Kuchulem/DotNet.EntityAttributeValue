@@ -1,0 +1,9 @@
+[submodule "src/Abstractions"]
+	path = src/Abstractions
+	url = git@github.com:Kuchulem/DotNet.EntityAttributeValue.Abstractions.git
+[submodule "src/Converters"]
+	path = src/Converters
+	url = git@github.com:Kuchulem/DotNet.EntityAttributeValue.Converters.git
+[submodule "src/EntityFrameworkCore"]
+	path = src/EntityFrameworkCore
+	url = git@github.com:Kuchulem/DotNet.EntityAttributeValue.EntityFrameworkCore.git
