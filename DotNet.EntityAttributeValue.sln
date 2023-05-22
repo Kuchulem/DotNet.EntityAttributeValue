@@ -3,12 +3,41 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kuchulem.DotNet.EntityAttributeValue.Abstractions", "src\Abstractions\src\Kuchulem.DotNet.EntityAttributeValue.Abstractions\Kuchulem.DotNet.EntityAttributeValue.Abstractions.csproj", "{CAF688B4-8E85-409F-9081-6A2A56C47BAE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kuchulem.DotNet.EntityAttributeValue.Converters", "src\Converters\src\Kuchulem.DotNet.EntityAttributeValue.Converters\Kuchulem.DotNet.EntityAttributeValue.Converters.csproj", "{D80EF03F-C97F-446E-8538-5C9C2BB380D3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kuchulem.DotNet.EntityAttributeValue.Converters.Tests", "src\Converters\tests\Kuchulem.DotNet.EntityAttributeValue.Converters.Tests\Kuchulem.DotNet.EntityAttributeValue.Converters.Tests.csproj", "{84000022-5784-4D5A-A5B9-EC4005AF0D80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kuchulem.DotNet.EntityAttributeValue.Demo.ConsoleApp", "demo\Kuchulem.DotNet.EntityAttributeValue.Demo.ConsoleApp\Kuchulem.DotNet.EntityAttributeValue.Demo.ConsoleApp.csproj", "{E99FAD10-878C-403F-BDEC-E78831F346A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAF688B4-8E85-409F-9081-6A2A56C47BAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAF688B4-8E85-409F-9081-6A2A56C47BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAF688B4-8E85-409F-9081-6A2A56C47BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAF688B4-8E85-409F-9081-6A2A56C47BAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D80EF03F-C97F-446E-8538-5C9C2BB380D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D80EF03F-C97F-446E-8538-5C9C2BB380D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D80EF03F-C97F-446E-8538-5C9C2BB380D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D80EF03F-C97F-446E-8538-5C9C2BB380D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84000022-5784-4D5A-A5B9-EC4005AF0D80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84000022-5784-4D5A-A5B9-EC4005AF0D80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84000022-5784-4D5A-A5B9-EC4005AF0D80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84000022-5784-4D5A-A5B9-EC4005AF0D80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E99FAD10-878C-403F-BDEC-E78831F346A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E99FAD10-878C-403F-BDEC-E78831F346A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E99FAD10-878C-403F-BDEC-E78831F346A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E99FAD10-878C-403F-BDEC-E78831F346A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {603759D5-87AE-4D97-B972-FCEB8CA111FB}
 	EndGlobalSection
 EndGlobal
